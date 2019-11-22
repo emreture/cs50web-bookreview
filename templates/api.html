@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container">
+    <h3>API Access</h3>
+    <p>
+        You can make a GET request to <code>/api/&lt;isbn&gt;</code> to get some information about the books.
+        <code>&lt;isbn&gt;</code> is the ISBN number of the book.
+    </p>
+    <p>
+        Response will be a JSON object containing the book's title, author, publication date, ISBN number, review count and average score.
+    </p>
+    <p>
+        An example JSON object returned:
+        <pre class="bg-light">
+            <code>
+    {
+        "author": "Richard Yates",
+        "average_score": 4.5,
+        "isbn": "0413757102",
+        "review_count": 2,
+        "title": "Revolutionary Road",
+        "year": 1961,
+    }
+            </code>
+        </pre>
+    </p>
+    <p>
+        If the requested ISBN number isn’t found, a 404 error is returned.
+    </p>
+</div>
+{% endblock body %}

@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container">
+    <h3>Books</h3>
+    <form method="post">
+        <div>
+            <input id="q" name="q" class="form-control" placeholder="ISBN, title or author">
+            <button type="submit" class="btn btn-primary mt-2">Search</button>
+        </div>
+    </form>
+</div>
+<div class="container">
+    <hr>
+    {% if books %}
+        <p>{{ books|length }} record(s) found for '{{ q }}'.</p>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">ISBN</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Year</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td>{{ book[0] }}</td>
+                    <td>{{ book[1] }}</td>
+                    <td><a href="/book/{{ book[0] }}">{{ book[2] }}</a></td>
+                    <td>{{ book[3] }}</td>
+                    <td>{{ book[4] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</div>
+{% endblock body %}

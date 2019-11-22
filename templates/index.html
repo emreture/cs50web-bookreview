@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container">
+    <h2>Book Reviews</h2>
+    <p>
+        This website is one of the course projects from CS50's Web Programming with Python and JavaScript course.
+    </p>
+    <p>
+        Please <a href="/login">log in </a>to search for books, leave reviews for individual books, and see the reviews made by other people.
+    </p>
+    <p>
+        Once you are logged in, you can search for a book by ISBN number of a book, the title of a book, or the author of a book.
+        When you click on a book from the results of the search page, you should be taken to a book page, with details about the book: its title,
+        author, publication year, ISBN number, and any reviews that users have left for the book.
+    </p>
+    <p>
+        On the book page, you should be able to submit a review: consisting of a rating on a scale of 1 to 5, as well as
+        a text component to the review where you can write their opinion about a book.
+    </p>
+    <p>
+        On the book page, you can see (if available) the average rating and number of ratings the work has received from Goodreads.
+    </p>
+    <h4>API Access</h4>
+    <p>
+        You can make a GET request to <code>/api/&lt;isbn&gt;</code> to get some information about the books.
+        Please refer to <a href="/api">API access</a> page for details.
+    </p>
+</div>
+{% endblock body %}

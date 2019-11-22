@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container">
+    <h3>{{ book_details[2] }}</h3>
+    <div class="row">
+        <div class="col-sm-2 book-col">Author</div><div class="col-sm">{{ book_details[3] }}</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 book-col">Publication year</div><div class="col-sm">{{ book_details[4] }}</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 book-col">ISBN</div><div class="col-sm">{{ book_details[1] }}</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 book-col">Average rating</div><div class="col-sm">
+            {% if ratings_average %}
+            {{ ratings_average | round(2) }}
+            {% else %}
+            Not rated yet
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 book-col">Number of ratings</div><div class="col-sm">{{ ratings_count }}</div>
+    </div>
+    {% if goodreads %}
+    <a href="https://www.goodreads.com/book/show/{{ goodreads['id'] }}" title="Click to visit goodreads website about this book" target="_blank"><img src="/static/goodreads.svg" alt="Goodreads Review Data"></a>
+    <div class="row">
+        <div class="col-sm-2 book-col">Average rating</div><div class="col-sm">{{ goodreads['average_rating'] }}</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 book-col">Number of ratings</div><div class="col-sm">{{ goodreads['work_ratings_count'] }}</div>
+    </div>
+    {% endif %}
+    <hr>
+    <h4>User reviews</h4>
+    {% if reviews %}
+        {% for review in reviews %}
+    <h5 class="mt-3">{{ review.username }}<span class="pl-3"><img src="/static/star{{ review.rating }}.png" height="16px"></span><small class="pl-3 text-muted"><small><em>reviewed on {{ review.review_date.strftime('%Y-%m-%d %H:%M:%S') }}</em></small></small></h5>
+
+        <div style="white-space: pre-wrap;">{{ review.review| safe }}</div>
+        {% endfor %}
+    {% else %}
+    No user reviews yet.
+    {% endif %}
+    <hr>
+    <h4>Submit your review</h4>
+    <form method="post">
+        <label class="mr-2">Your rating:</label>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="rating" id="inlineRadio1" value="1">
+            <label class="form-check-label" for="inlineRadio1">1</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="rating" id="inlineRadio2" value="2">
+            <label class="form-check-label" for="inlineRadio2">2</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="rating" id="inlineRadio3" value="3" checked="checked">
+            <label class="form-check-label" for="inlineRadio3">3</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="rating" id="inlineRadio4" value="4">
+            <label class="form-check-label" for="inlineRadio4">4</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="rating" id="inlineRadio5" value="5">
+            <label class="form-check-label" for="inlineRadio5">5</label>
+        </div>
+        <div class="form-group">
+            <label for="textarea">Your review:</label>
+            <textarea class="form-control" id="textarea" name="review" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock body %}
