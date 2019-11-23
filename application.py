@@ -73,6 +73,8 @@ def signup():
                    {"username": username, "password": password})
         db.commit()
         session['username'] = username
+        result = db.execute("SELECT id FROM users WHERE username = :username", {"username": username}).fetchone()
+        session['userid'] = result.id
         return redirect(url_for("search"))
     return render_template("signup.html")
 
