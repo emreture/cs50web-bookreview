@@ -1,4 +1,5 @@
 requests
+Werkzeug==0.16.0
 Flask
 Flask-Session
 psycopg2-binary
